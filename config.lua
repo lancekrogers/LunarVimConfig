@@ -148,22 +148,6 @@ lvim.plugins = {
     'kelly-lin/telescope-ag',
     dependencies = { "nvim-telescope/telescope.nvim" },
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     vim.g.copilot_assume_mapped = true
-  --   end,
-
-  -- },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   after = { "copilot.lua" },
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --   end,
-  -- },
   {
     'xolox/vim-notes',
     dependencies = {
@@ -270,34 +254,6 @@ lvim.plugins = {
 lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "ag")
 end
-
-
--- local ok, copilot = pcall(require, "copilot")
--- if not ok then
---   return
--- end
-
--- copilot.setup {
---   suggestion = {
---     enabled = true,
---     keymap = {
---       accept = "<c-l>",
---       next = "<c-j>",
---       prev = "<c-k>",
---       dismiss = "<c-h>",
---     },
---   },
---   filetypes = {
---     markdown = true,
---     yaml = true,
---   },
---   panel = {
---     auto_refresh = true,
---   }
--- }
-
-local opts = { noremap = true, silent = true }
--- vim.api.nvim_set_keymap("n", "<c-s>", "<cmd>lua require('copilot.suggestion').toggle_auto_trigger()<CR>", opts)
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
