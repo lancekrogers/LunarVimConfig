@@ -8,9 +8,29 @@ vim.opt.listchars = "tab:>-,trail:."
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
 vim.g.winresizer_start_key = '<C-w>'
 vim.opt.spelllang = 'en_us'
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { "*.py", "*.vy" },
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.colorcolumn = "80"
+    vim.opt_local.textwidth = 79
+  end
+})
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { "*.ts", "*.js", "*.html", "*.css", "*.jsx", "*.sql", "*.sol", "*.lua" },
+  callback = function()
+    vim.opt_local.colorcolumn = "100"
+    vim.opt_local.textwidth = 99
+  end
+})
+
 -- Toggle spellcheck
 vim.keymap.set("n", "<S-s>", function()
-  vim.opt_local.spell = not (vim.opt_local.spell:get())
+  vim.o.spell = not (vim.opt_local.spell:get())
   print("spell: " .. tostring(vim.o.spell))
 end)
 
@@ -204,9 +224,6 @@ lvim.plugins = {
     "lancekrogers/vim-log-highlighting",
   },
   {
-    "lancekrogers/vimscript-config",
-  },
-  {
     'airblade/vim-gitgutter'
   },
   {
@@ -248,7 +265,19 @@ lvim.plugins = {
       vim.g.mkdp_auto_start = 1
     end,
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require('goto-preview').setup {
+        width = 120,             -- Width of the floating window
+        height = 25,             -- Height of the floating window
+        default_mappings = true, -- Bind default mappings
+        opacity = 0,             -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        dismiss_on_move = false,
+      }
+    end
+  },
 }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
