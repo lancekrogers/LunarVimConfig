@@ -174,7 +174,7 @@ lvim.plugins = {
       'xolox/vim-misc'
     },
     config = function()
-      vim.g.notes_directories = { "~/Documents/Obsidian Vault/Notes/" }
+      vim.g.notes_directories = { "~/Documents/Obsidian Vault/VimNotes/" }
       vim.g.notes_suffix = ".md"
     end,
   },
@@ -278,6 +278,19 @@ lvim.plugins = {
       }
     end
   },
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+    config = function()
+      require("venv-selector").setup {
+        poetry_path = "~/Library/Caches/pypoetry",
+        -- pipenv_path = "your_path_here",
+        -- pyenv_path = "your_path_here",
+        -- anaconda_path = "your_path_here",
+      }
+    end,
+    event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+  },
 }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
@@ -304,7 +317,10 @@ lvim.format_on_save.pattern = { "*.py", "*.lua", "*.js", "*.ts", "*.go" }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { name = "flake8" },
+  {
+    name = "flake8",
+    args = { "--ignore=E501,W503" }
+  },
 
 }
 
