@@ -1,3 +1,4 @@
+OBSIDIAN_PATH = os.getenv("OBSIDIAN_PATH")
 -- vim options
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -174,7 +175,7 @@ lvim.plugins = {
       'xolox/vim-misc'
     },
     config = function()
-      vim.g.notes_directories = { "~/Documents/Obsidian Vault/VimNotes/" }
+      vim.g.notes_directories = { OBSIDIAN_PATH .. "VimNotes/" }
       vim.g.notes_suffix = ".md"
     end,
   },
@@ -182,7 +183,7 @@ lvim.plugins = {
     "epwalsh/obsidian.nvim",
     config = function()
       require("obsidian").setup({
-        dir = "~/Documents/Obsidian Vault",
+        dir = OBSIDIAN_PATH,
         notes_subdir = "Notes",
       })
     end,
