@@ -51,6 +51,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["//"] = ":Ag<SPACE>"
 lvim.keys.normal_mode["<C-e>"] = false
 lvim.keys.normal_mode["<C-y>"] = false
+lvim.keys.visual_mode["<Leader>mc"] = "!mdtable2csv<cr>"
 
 -- lvim.keys.normal_mode["///"] = ":AgJS<SPACE>"
 --...
@@ -266,7 +267,7 @@ lvim.plugins = {
       vim.g.mkdp_auto_start = 1
     end,
   },
-  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  { "ellisonleao/glow.nvim",     config = true, cmd = "Glow" },
   {
     "rmagatti/goto-preview",
     config = function()
@@ -292,6 +293,7 @@ lvim.plugins = {
     end,
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
+  { "dhruvasagar/vim-table-mode" },
 }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
@@ -320,7 +322,7 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   {
     name = "flake8",
-    args = { "--ignore=E501,W503" }
+    args = { "--ignore=E501,W503,E203" }
   },
 
 }
