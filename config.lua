@@ -142,9 +142,14 @@ lvim.plugins = {
         group = format_sync_grp,
       })
       require("go").setup({
-        -- goimport = 'gopls',
+        -- lsp_cfg = false,
+        goimport = 'gopls',
+        test_dir = '',
         max_line_len = 120,
+        lsp_on_attach = true,
       })
+      -- local cfg = require 'go.lsp'.config()
+      -- require('lspconfig').gopls.setup(cfg)
     end
   },
   {
@@ -294,6 +299,12 @@ lvim.plugins = {
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
   { "dhruvasagar/vim-table-mode" },
+  {
+    "jeniasaigak/goplay.nvim",
+    config = function()
+      require('goplay').setup() {}
+    end
+  },
 }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
@@ -312,11 +323,11 @@ formatters.setup {
     ---@usage only start in these filetypes, by default it will attach to all filetypes it supports
     filetypes = { "typescript", "typescriptreact" },
   },
-  { name = "goimports" },
+  -- { name = "goimports" },
   { name = "eslint" }
 }
 lvim.format_on_save.enabled = true
-lvim.format_on_save.pattern = { "*.py", "*.lua", "*.js", "*.ts", "*.go" }
+lvim.format_on_save.pattern = { "*.py", "*.lua", "*.js", "*.ts" }
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
