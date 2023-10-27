@@ -9,6 +9,7 @@ vim.opt.listchars = "tab:>-,trail:."
 vim.keymap.set('n', '<F5>', vim.cmd.UndotreeToggle)
 vim.g.winresizer_start_key = '<C-w>'
 vim.opt.spelllang = 'en_us'
+vim.treesitter.query.set("lua", "injections", "")
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { "*.py", "*.vy" },
@@ -299,12 +300,6 @@ lvim.plugins = {
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
   { "dhruvasagar/vim-table-mode" },
-  {
-    "jeniasaigak/goplay.nvim",
-    config = function()
-      require('goplay').setup() {}
-    end
-  },
 }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
