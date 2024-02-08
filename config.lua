@@ -60,7 +60,7 @@ lvim.keys.visual_mode["<Leader>mc"] = "!mdtable2csv<cr>"
 lvim.builtin.nvimtree.setup.view.relativenumber = true
 lvim.builtin.nvimtree.setup.reload_on_bufenter = false
 lvim.builtin.indentlines.options = { use_treesitter = false, filetype_exclude = { 'help', '.mod' } }
-
+lvim.builtin.telescope.ignore_patterns = { 'node_modules/*', '.git/*' }
 
 lvim.builtin.terminal.open_mapping = "<c-t>"
 
@@ -118,12 +118,6 @@ lvim.plugins = {
     ft = { "fugitive" }
   },
   {
-    "pwntester/octo.nvim",
-    config = function()
-      require("octo").setup()
-    end,
-  },
-  {
     "jacqueswww/vim-vyper"
   },
   {
@@ -159,17 +153,6 @@ lvim.plugins = {
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
       require("dap-go").setup()
-    end,
-  },
-  {
-    "pwntester/octo.nvim",
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim',
-      -- 'kyazdani42/nvim-web-devicons',
-    },
-    config = function()
-      require("octo").setup()
     end,
   },
   {
