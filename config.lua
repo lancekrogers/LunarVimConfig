@@ -132,17 +132,11 @@ lvim.plugins = {
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
         callback = function()
-          require('go.format').goimport()
+          require('go.format').goimports()
         end,
         group = format_sync_grp,
       })
-      require("go").setup({
-        -- lsp_cfg = false,
-        goimport = 'gopls',
-        test_dir = '',
-        max_line_len = 120,
-        lsp_on_attach = true,
-      })
+      require("go").setup({})
       -- local cfg = require 'go.lsp'.config()
       -- require('lspconfig').gopls.setup(cfg)
     end
@@ -172,6 +166,7 @@ lvim.plugins = {
   {
     "epwalsh/obsidian.nvim",
     config = function()
+      vim.wo.conceallevel = 2
       require("obsidian").setup({
         dir = OBSIDIAN_PATH,
         notes_subdir = "Notes",
@@ -242,11 +237,20 @@ lvim.plugins = {
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+    opts = {
+      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+    }
+  },
+  {
     "rest-nvim/rest.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    ft = "http",
+    dependencies = { "luarocks.nvim" },
     config = function()
       require("rest-nvim").setup()
-    end
+    end,
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -283,6 +287,7 @@ lvim.plugins = {
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   },
   { "dhruvasagar/vim-table-mode" },
+  { "chrisbra/csv.vim" },
 }
 
 lvim.builtin.telescope.on_config_done = function(telescope)
