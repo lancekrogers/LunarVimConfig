@@ -245,6 +245,14 @@ lvim.plugins = {
     }
   },
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+    opts = {
+      rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+    }
+  },
+  {
     "rest-nvim/rest.nvim",
     ft = "http",
     dependencies = { "luarocks.nvim" },
@@ -273,18 +281,23 @@ lvim.plugins = {
       }
     end
   },
+  
   {
-    "linux-cultist/venv-selector.nvim",
-    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("venv-selector").setup {
-        poetry_path = "~/Library/Caches/pypoetry",
-        -- pipenv_path = "your_path_here",
-        -- pyenv_path = "your_path_here",
-        -- anaconda_path = "your_path_here",
-      }
+  "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig", 
+      "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python",
+      branch = "regexp",
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
+  lazy = false,
+  branch = "regexp", -- This is the regexp branch, use this for the new version
+  config = function()
+      require("venv-selector").setup()
     end,
-    event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
   },
   { "dhruvasagar/vim-table-mode" },
   { "chrisbra/csv.vim" },
