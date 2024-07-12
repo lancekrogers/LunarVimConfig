@@ -253,21 +253,21 @@ lvim.plugins = {
     }
   },
   {
-    "rest-nvim/rest.nvim",
+    "Blockhead-Consulting/rest.nvim",
     ft = "http",
     dependencies = { "luarocks.nvim" },
     config = function()
       require("rest-nvim").setup()
     end,
   },
-  {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    ft = "markdown",
-    config = function()
-      vim.g.mkdp_auto_start = 1
-    end,
-  },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   build = "cd app && npm install",
+  --   ft = "markdown",
+  --   config = function()
+  --     vim.g.mkdp_auto_start = 1
+  -- },
+  --   end,
   { "ellisonleao/glow.nvim",     config = true, cmd = "Glow" },
   {
     "rmagatti/goto-preview",
@@ -301,11 +301,18 @@ lvim.plugins = {
   },
   { "dhruvasagar/vim-table-mode" },
   { "chrisbra/csv.vim" },
-}
+  -- {
+  --   'stevearc/oil.nvim',
+  --   opts = {},
+  --   -- Optional dependencies
+  --   dependencies = { "echasnovski/mini.icons" },
+  --   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    -- },
+  }
 
-lvim.builtin.telescope.on_config_done = function(telescope)
-  pcall(telescope.load_extension, "ag")
-end
+  lvim.builtin.telescope.on_config_done = function(telescope)
+    pcall(telescope.load_extension, "ag")
+  end
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
