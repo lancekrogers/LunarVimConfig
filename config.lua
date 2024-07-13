@@ -260,14 +260,21 @@ lvim.plugins = {
       require("rest-nvim").setup()
     end,
   },
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   build = "cd app && npm install",
-  --   ft = "markdown",
-  --   config = function()
-  --     vim.g.mkdp_auto_start = 1
-  -- },
-  --   end,
+  {
+  "wojciech-kulik/xcodebuild.nvim",
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+    "MunifTanjim/nui.nvim",
+    "nvim-tree/nvim-tree.lua", -- (optional) to manage project files
+    "stevearc/oil.nvim", -- (optional) to manage project files
+    "nvim-treesitter/nvim-treesitter", -- (optional) for Quick tests support (required Swift parser)
+  },
+    config = function()
+      require("xcodebuild").setup({
+          -- put some options here or leave it empty to use default settings
+      })
+    end,
+  },
   { "ellisonleao/glow.nvim",     config = true, cmd = "Glow" },
   {
     "rmagatti/goto-preview",
